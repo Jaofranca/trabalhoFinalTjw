@@ -1,0 +1,55 @@
+<div th:replace="shared/header" xmlns:th="http://www.w3.org/1999/xhtml"></div>
+                <div class="container-fluid">
+
+
+                    <h1 class="h3 mb-2 text-gray-800">Listagem dos Professores</h1>
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
+                        </div>
+                        <a href="/teacher/form" class = "btn btn-primary">Criar Novo</a>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th>Id</th>
+                                            <th>Nome</th>
+                                            <th>Cpf</th>
+                                            <th>Idade</th>
+                                            <th>Disciplinas</th>
+                                            <th></th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tfoot>
+                                        <tr>
+                                            <th>Id</th>
+                                            <th>Nome</th>
+                                            <th>Cpf</th>
+                                            <th>Idade</th>
+                                            <th>Disciplinas</th>
+                                            <th></th>
+                                            <th></th>
+                                        </tr>
+                                    </tfoot>
+                                    <tbody>
+                                        <tr th:each = "teacher: ${TeachersList}">
+                                            <td th:text="${teacher.id}" ></td>
+                                            <td th:text="${teacher.name}" ></td>
+                                            <td th:text="${teacher.cpf}" ></td>
+                                            <td th:text="${teacher.age}" ></td>
+                                            <td th:text="${teacher.classrooms}" ></td>
+                                            <td><a th:href="@{/teacher/{id}(id=${teacher.id})}" class = "btn btn-warning"> Alterar</a> </td>
+                                            <td><a href="#" th:onclick="'window.location.href = \'' + @{/teacher/{id}(id=${teacher.id})} + '/delete\''"  class = "btn btn-danger"> Excluir</a> </td>
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+<div th:replace="shared/footer" xmlns:th="http://www.w3.org/1999/xhtml"></div>

@@ -21,7 +21,7 @@ public class Student {
     @Column(name = "cpf",nullable = false,unique = true)
     private String cpf;
     @Column(name = "age",nullable = false,unique = false)
-    private Integer age;
+    private int age;
 
     @ManyToMany(cascade = CascadeType.PERSIST)
     @JoinTable(
@@ -32,7 +32,7 @@ public class Student {
     private List<Classroom> classrooms;
 
     @Builder
-    public Student(String name, String cpf, Integer age, List<Classroom> classrooms) {
+    public Student(String name, String cpf, int age, List<Classroom> classrooms) {
         this.name = name;
         this.cpf = cpf;
         this.age = age;

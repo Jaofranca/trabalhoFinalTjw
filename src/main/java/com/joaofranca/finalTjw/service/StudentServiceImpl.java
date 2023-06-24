@@ -14,34 +14,34 @@ import java.util.List;
 @Primary
 @RequiredArgsConstructor
 public class StudentServiceImpl implements StudentService{
-    private final StudentRepository personRepository;
-    private final StudentMapper personMapper;
+    private final StudentRepository studentRepository;
+    private final StudentMapper studentMapper;
     @Override
     public StudentResponseDTO findById(Long id) {
-        return personMapper.toStudentDTO(returnStudent(id));
+        return studentMapper.toStudentDTO(returnStudent(id));
     }
     @Override
     public List<StudentResponseDTO> findAll() {
-        return personMapper.toStudentsDTO(personRepository.findAll());
+        return studentMapper.toStudentsDTO(studentRepository.findAll());
     }
     @Override
-    public StudentResponseDTO register(StudentRequestDTO personDTO) {
-        Student person = personMapper.toStudent(personDTO);
-        return personMapper.toStudentDTO(personRepository.save(person));
+    public StudentResponseDTO register(StudentRequestDTO studentDTO) {
+        Student person = studentMapper.toStudent(studentDTO);
+        return studentMapper.toStudentDTO(studentRepository.save(person));
     }
     @Override
-    public StudentResponseDTO update( long id, StudentRequestDTO personDTO) {
+    public StudentResponseDTO update( long id, StudentRequestDTO studentDTO) {
         Student person = returnStudent(id);
-        personMapper.updateStudentData(person,personDTO);
-        return personMapper.toStudentDTO(personRepository.save(person));
+        studentMapper.updateStudentData(person,studentDTO);
+        return studentMapper.toStudentDTO(studentRepository.save(person));
     }
     @Override
     public String delete(long id) {
-        personRepository.deleteById(id);
+        studentRepository.deleteById(id);
         return "Person id: "+id+" deleted";
     }
     private Student returnStudent(long id){
-        return personRepository.findById(id).orElseThrow(()
+        return studentRepository.findById(id).orElseThrow(()
                 -> new RuntimeException("Person wasn't found on database"));
     }
 }

@@ -11,7 +11,7 @@ public class StudentResponseDTO {
     private Long id;
     private String name;
     private String cpf;
-    private Integer age;
+    private int age;
     private List<Classroom> classrooms;
 
     public StudentResponseDTO(Student student){

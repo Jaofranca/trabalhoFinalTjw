@@ -9,7 +9,7 @@ public interface StudentService {
 
     StudentResponseDTO findById(Long id);
     List<StudentResponseDTO> findAll();
-    StudentResponseDTO register(StudentRequestDTO personDTO);
+    StudentResponseDTO register(StudentRequestDTO studentDTO);
     StudentResponseDTO update(long id,StudentRequestDTO personDTO);
     String delete(long id);
 }

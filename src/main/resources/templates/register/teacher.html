@@ -1,0 +1,25 @@
+<div th:replace="shared/header" xmlns:th="http://www.w3.org/1999/xhtml"></div>
+                <div class="container-fluid">
+
+                    <h1 class="h3 mb-2 text-gray-800">Novo Professor</h1>
+                    <div class="card shadow mb-4" style = "padding: 30px;">
+
+                        <form method="POST" action ="/teacher/register" >
+                            <div class="form-group">
+                                <label for="TeacherName">Nome</label>
+                                <input type="text" class="form-control" name ="name" required id="TeacherName" placeholder="Digite o nome do Professor">
+                            </div>
+                            <div class="form-group">
+                                <label for="TeacherCpf">CPF</label>
+                                <input type="number" class="form-control"  name="cpf" required id="TeacherCpf" placeholder="Digite o CPF do Professor">
+                            </div>
+                            <div class="form-group">
+                                <label for="TeacherAge">Idade</label>
+                                <input type="number" class="form-control" name="age" required id="TeacherAge" min="10" max="100" placeholder="Digite a idade do Professor">
+                            </div>
+
+                            <button type="submit" class="btn btn-primary">Enviar</button>
+                        </form>
+
+            </div>
+<div th:replace="shared/footer" xmlns:th="http://www.w3.org/1999/xhtml"></div>

@@ -1,0 +1,26 @@
+<div th:replace="shared/header" xmlns:th="http://www.w3.org/1999/xhtml"></div>
+                <div class="container-fluid">
+
+
+                    <h1 class="h3 mb-2 text-gray-800">Editar o Professor </h1>
+                    <div class="card shadow mb-4" style = "padding: 30px;">
+
+                        <form method="POST" th:action ="@{'/teacher/' + ${teacher.id} + '/update'}" >
+                            <div class="form-group">
+                                <label for="TeacherName">Nome</label>
+                                <input type="text" class="form-control" th:value= "${teacher.name}" name ="name" required id="TeacherName" placeholder="Digite o nome do Estudante" >
+                            </div>
+                            <div class="form-group">
+                                <label for="TeacherCpf">CPF</label>
+                                <input type="number" class="form-control" th:value= "${teacher.cpf}"  name="cpf" required id="TeacherCpf" placeholder="Digite o CPF do Estudante">
+                            </div>
+                            <div class="form-group">
+                                <label for="TeacherAge">Idade</label>
+                                <input type="number" class="form-control" th:value= "${teacher.age}" name="age" required id="TeacherAge" min="10" max="100" placeholder="Digite a idade do Estudante">
+                            </div>
+
+                            <button type="submit" class="btn btn-primary">Enviar</button>
+                        </form>
+
+            </div>
+<div th:replace="shared/footer" xmlns:th="http://www.w3.org/1999/xhtml"></div>
