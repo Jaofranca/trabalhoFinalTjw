@@ -23,12 +23,14 @@ public class Student {
     @Column(name = "age",nullable = false,unique = false)
     private int age;
 
-    @ManyToMany(cascade = CascadeType.PERSIST)
-    @JoinTable(
-            name = "students_classrooms",
-            joinColumns = @JoinColumn(name = "student_id" ),
-            inverseJoinColumns = @JoinColumn(name = "classroom_id")
-    )
+
+//    @ManyToMany(cascade = CascadeType.PERSIST)
+//    @JoinTable(
+//            name = "students_classrooms",
+//            joinColumns = @JoinColumn(name = "student_id" ),
+//            inverseJoinColumns = @JoinColumn(name = "classroom_id")
+//    )
+    @ManyToMany(mappedBy = "students", cascade = CascadeType.PERSIST)
     private List<Classroom> classrooms;
 
     @Builder

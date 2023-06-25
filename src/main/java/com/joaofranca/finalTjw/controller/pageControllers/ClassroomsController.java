@@ -7,6 +7,7 @@ import com.joaofranca.finalTjw.dto.response.StudentResponseDTO;
 import com.joaofranca.finalTjw.dto.response.TeacherResponseDTO;
 import com.joaofranca.finalTjw.entity.Teacher;
 import com.joaofranca.finalTjw.service.ClassroomService;
+import com.joaofranca.finalTjw.service.StudentService;
 import com.joaofranca.finalTjw.service.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,6 +27,9 @@ public class ClassroomsController {
     @Autowired
     private TeacherService teacherService;
 
+    @Autowired
+    private StudentService studentService;
+
     @GetMapping("/classroom/table")
     public ModelAndView index(Model model){
         List<ClassroomResponseDTO> ClassroomsList = classroomService.findAll();
@@ -36,7 +40,9 @@ public class ClassroomsController {
     @GetMapping("/classroom/form")
     public ModelAndView classroomForm(Model teacherModel){
         List<TeacherResponseDTO> teachersList = teacherService.findAll();
+        List<StudentResponseDTO> studentsList = studentService.findAll();
         teacherModel.addAttribute("TeachersList",teachersList);
+        teacherModel.addAttribute("StudentsList",studentsList);
         return new ModelAndView("register/classroom");
     }
 

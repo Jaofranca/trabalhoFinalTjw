@@ -22,6 +22,7 @@
                                             <th>Nome</th>
                                             <th>Cpf</th>
                                             <th>Idade</th>
+                                            <th>Disciplinas</th>
                                             <th></th>
                                             <th></th>
                                         </tr>
@@ -32,6 +33,7 @@
                                             <th>Nome</th>
                                             <th>Cpf</th>
                                             <th>Idade</th>
+                                            <th>Disciplinas</th>
                                             <th></th>
                                             <th></th>
                                         </tr>
@@ -42,7 +44,9 @@
                                             <td th:text="${student.name}" ></td>
                                             <td th:text="${student.cpf}" ></td>
                                             <td th:text="${student.age}" ></td>
-
+                                            <td >
+                                                <a th:each="classroom: ${student.classrooms}" th:text = "${classroom.name} +','+' '" ></a>
+                                            </td>
                                             <td><a th:href="@{/student/{id}(id=${student.id})}" class = "btn btn-warning"> Alterar</a> </td>
                                             <td><a href="#" th:onclick="'window.location.href = \'' + @{/student/{id}(id=${student.id})} + '/delete\''"  class = "btn btn-danger"> Excluir</a> </td>
                                         </tr>

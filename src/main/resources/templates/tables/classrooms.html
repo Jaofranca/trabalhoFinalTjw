@@ -37,7 +37,10 @@
                                             <td th:text="${classroom.id}" ></td>
                                             <td th:text="${classroom.name}" ></td>
                                             <td th:text="${classroom.teacher.name}" ></td>
-                                            <td th:text="${classroom.students}" ></td>
+
+                                            <td >
+                                                <a th:each="students: ${classroom.students}" th:text = "${students.name} +','+' '" ></a>
+                                            </td>
                                             <td><a th:href="@{/classroom/{id}(id=${classroom.id})}" class = "btn btn-warning"> Alterar</a> </td>
                                             <td><a href="#" th:onclick="'window.location.href = \'' + @{/classroom/{id}(id=${classroom.id})} + '/delete\''"  class = "btn btn-danger"> Excluir</a> </td>
                                         </tr>

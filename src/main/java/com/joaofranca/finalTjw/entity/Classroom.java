@@ -23,7 +23,12 @@ public class Classroom {
     @JoinColumn(name = "teacher_id")
     private Teacher teacher;
 
-    @ManyToMany(mappedBy = "classrooms",cascade = CascadeType.PERSIST)
+    @ManyToMany(cascade = CascadeType.PERSIST)
+    @JoinTable(name = "students_classrooms", joinColumns = @JoinColumn(name = "classroom_id"), inverseJoinColumns = @JoinColumn(name = "student_id"))
+//    @JsonIgnore
+////    private Set<Student> students;
+
+//    @ManyToMany(mappedBy = "classrooms",cascade = CascadeType.PERSIST)
     private List<Student> students;
 
     @Builder

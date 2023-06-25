@@ -44,7 +44,10 @@
                                             </td>
                                             <td><a th:href="@{/teacher/{id}(id=${teacher.id})}" class = "btn btn-warning"> Alterar</a> </td>
                                             <td><a href="#" th:onclick="'window.location.href = \'' + @{/teacher/{id}(id=${teacher.id})} + '/delete\''"  class = "btn btn-danger"> Excluir</a> </td>
+
+
                                         </tr>
+
 
                                     </tbody>
                                 </table>
@@ -53,5 +56,10 @@
                     </div>
 
                 </div>
+
             </div>
 <div th:replace="shared/footer" xmlns:th="http://www.w3.org/1999/xhtml"></div>
+
+
+
+
