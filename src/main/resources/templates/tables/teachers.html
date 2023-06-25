@@ -39,7 +39,9 @@
                                             <td th:text="${teacher.name}" ></td>
                                             <td th:text="${teacher.cpf}" ></td>
                                             <td th:text="${teacher.age}" ></td>
-                                            <td th:text="${teacher.classrooms}" ></td>
+                                            <td >
+                                                <a th:each="classroom: ${teacher.classrooms}" th:text = "${classroom.name} +','+' '" ></a>
+                                            </td>
                                             <td><a th:href="@{/teacher/{id}(id=${teacher.id})}" class = "btn btn-warning"> Alterar</a> </td>
                                             <td><a href="#" th:onclick="'window.location.href = \'' + @{/teacher/{id}(id=${teacher.id})} + '/delete\''"  class = "btn btn-danger"> Excluir</a> </td>
                                         </tr>

@@ -13,11 +13,11 @@
                             </div>
                             <label for="ClassroomTeacher">Professor</label>
                             <div class="col-lg-3" >
-                                <select class="form-control" id="ClassroomTeacher"  name="testOrder">
+                                <select class="form-control" id="ClassroomTeacher"  name="teacher">
                                     <option value="">Escolha o professor da turma</option>
                                     <option th:each="teacher : ${TeachersList}"
-                                            th:value="${teacher.id}"
-                                            th:text="${teacher.name}"></option>
+                                            th:value="${teacher.name}"
+                                            th:text="${teacher.id}"></option>
                                 </select>
                             </div>
 <!--                            <div class="form-group">-->
