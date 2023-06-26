@@ -1,13 +1,7 @@
 <div th:replace="shared/header" xmlns:th="http://www.w3.org/1999/xhtml"></div>
                 <div class="container-fluid">
 
-                    <!-- Page Heading -->
                     <h1 class="h3 mb-2 text-gray-800">Listagem dos Estudantes</h1>
-<!--                    <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below.-->
-<!--                        For more information about DataTables, please visit the <a target="_blank"-->
-<!--                            href="https://datatables.net">official DataTables documentation</a>.</p>-->
-
-                    <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
                             <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
@@ -48,36 +42,33 @@
                                                 <a th:each="classroom: ${student.classrooms}" th:text = "${classroom.name} +','+' '" ></a>
                                             </td>
                                             <td><a th:href="@{/student/{id}(id=${student.id})}" class = "btn btn-warning"> Alterar</a> </td>
+                                            <td><a href="#" th:onclick="deletar([[${student.id}]])" class = "btn btn-danger"> Excluir</a> </td>
 
-                                            <td><a href="#" th:onclick="redirecionar(/*[[${student.id}]]*/)" class = "btn btn-danger"> Excluir</a> </td>
-                                            <!--                                            <td><a href="#" th:onclick="'window.location.href = \'' + @{/student/{id}(id=${student.id})} + '/delete\''"  class = "btn btn-danger"> Excluir</a> </td>-->
                                         </tr>
-                                        <script type="text/javascript" th:inline="javascript">
-                                           function redirecionar(id) {
-<!--                                                    if (confirm('Deseja realmente excluir este professor?')) {-->
-<!--                                                      var url = '/student/' + id + '/delete';-->
-<!--                                                      window.open(url)-->
-<!--                                                            .then(response => {-->
-<!--                                                                if (response.ok) {-->
-<!--                                                                    location.reload()-->
-<!--                                                                } else {-->
-<!--                                                                    console.error('Ocorreu um erro ao excluir o professor.')-->
-<!--                                                                }-->
-<!--                                                            })-->
-<!--                                                            .catch(error => {-->
-<!--                                                                console.error('Ocorreu um erro ao excluir o professor:', error)-->
-<!--                                                            })-->
-<!--                                                    }-->
-                                                        try {
-                                                        var confirmacao = confirm("Deseja abrir uma nova janela?");
-                                                        if (confirmacao) {
-                                                            var url = '/student/' + id + '/delete';
-                                                            window.open(url);
-                                                        }
-                                                        } catch (error) {
-                                                            console.log("Ocorreu um erro: " + error);
-                                                        }
+                                        <script th:inline="javascript">
+                                        /*<![CDATA[*/
+                                            function deletar(id) {
+                                                try {
+                                                    var confirmacao = confirm("Deseja redirecionar?");
+                                                    var students =/*[[${StudentsList}]]*/ '';
+                                                    var actualStudent = students.find(function(student) {
+                                                      return student.id === id;
+                                                    });
+                                                    console.log(actualStudent)
+                                                    if (confirmacao) {
+                                                    var studentClassrooms = actualStudent.classrooms;
+                                                    if(studentClassrooms == null){
+                                                        var url = '/student/' + id + '/delete';
+                                                        window.location.href = url;
+                                                    }else{
+                                                        throw new Error("Não é possivel deletar o estudante que está cadastrado em uma disciplina");
+                                                    }
+                                                    }
+                                                } catch (error) {
+                                                    alert(error);
                                                 }
+                                            }
+                                        /*]]>*/
                                         </script>
 
                                     </tbody>

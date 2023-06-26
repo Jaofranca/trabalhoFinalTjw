@@ -29,20 +29,22 @@
 
                             <script type="text/javascript" th:inline="javascript">
                              /*<![CDATA[*/
-                             var message =/*[[${StudentsList}]]*/ 'defaultanyvalue';
-                             console.log(message);
-                            if(message.length > 0){
+                             var message =/*[[${StudentsList}]]*/ '';
 
+                            if(message.length > 0){
                             const students = []
-                            const classroomStudents = []
+                            const classroomStudentsId = []
+
                             var studentsModelList = [[${StudentsList}]]
-                            var classroomStudentsList = [[${classroom.students}]]
+                            var classroomStudents = [[${classroom.students}]]
+
                             for (i = 0; i < studentsModelList.length; i++) {
                                 students.push(studentsModelList[i])
                             }
-                            for (i = 0; i < classroomStudentsList.length; i++) {
-                                classroomStudents.push(classroomStudentsList[i].id)
+                            for (i = 0; i < classroomStudents.length; i++) {
+                                classroomStudentsId.push(classroomStudents[i].id)
                             }
+                            console.log(classroomStudentsId)
                             var checkboxList = document.getElementById("ClassroomStudents");
                             var hiddenList = document.getElementById("selectedStudentsHidden");
                             var SelectedStudentsArray = []
@@ -53,7 +55,7 @@
                                 var listItem = document.createElement("li");
 
                                 var Div = document.createElement('div');
-                                Div.id = students[i].id;
+                                Div.id = checkboxId;
                                 Div.className = 'form-check';
 
                                 var checkbox = document.createElement("input");
@@ -61,31 +63,22 @@
                                 checkbox.name = "checkbox";
                                 checkbox.value = checkboxId;
                                 checkbox.id = checkboxId;
-                                if(classroomStudents.includes(checkboxId)){
+                                if(classroomStudentsId.includes(checkboxId)){
                                     checkbox.checked = true;
+                                    SelectedStudentsArray.push(checkboxId);
+                                    deleteFromList(classroomStudentsId,checkboxId)
+                                    console.log(classroomStudentsId)
                                 }
 
 
                                 checkbox.addEventListener('click', function() {
-                                  if(classroomStudents.includes(checkboxId)){
-                                    SelectedStudentsArray.push(checkboxId);
-                                    deleteFromList(classroomStudents,checkboxId)
-                                    alert(SelectedStudentsArray)
-                                }
-
+                                console.log(classroomStudentsId)
                                   if (this.checked) {
                                     SelectedStudentsArray.push(checkboxId);
-                                    console.log(SelectedStudentsArray)
+
                                   } else {
                                       deleteFromList(SelectedStudentsArray,checkboxId)
                                   }
-                                  const selectedStudentsInput = document.getElementById('selectedStudents');
-                                  const checkedCheckboxes = checkboxList.querySelectorAll('input[type="checkbox"]:checked');
-                                  const selectedStudents = Array.from(checkedCheckboxes).map(function(checkbox) {
-                                    return checkbox.value;
-                                  });
-                                  console.log(SelectedStudentsArray);
-                                  selectedStudentsInput.value = SelectedStudentsArray;
 
                                 });
 
@@ -99,6 +92,13 @@
 
 
                             }
+                                  const selectedStudentsInput = document.getElementById('selectedStudents');
+                                  const checkedCheckboxes = checkboxList.querySelectorAll('input[type="checkbox"]:checked');
+                                  const selectedStudents = Array.from(checkedCheckboxes).map(function(checkbox) {
+                                    return checkbox.value;
+                                  });
+                                  selectedStudentsInput.value = SelectedStudentsArray;
+                                  console.log(SelectedStudentsArray)
 
                                 }
 

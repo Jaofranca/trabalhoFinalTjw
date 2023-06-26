@@ -43,11 +43,34 @@
                                                 <a th:each="classroom: ${teacher.classrooms}" th:text = "${classroom.name} +','+' '" ></a>
                                             </td>
                                             <td><a th:href="@{/teacher/{id}(id=${teacher.id})}" class = "btn btn-warning"> Alterar</a> </td>
-                                            <td><a href="#" th:onclick="'window.location.href = \'' + @{/teacher/{id}(id=${teacher.id})} + '/delete\''"  class = "btn btn-danger"> Excluir</a> </td>
+                                            <td><a href="#" th:onclick="deletar([[${teacher.id}]])" class = "btn btn-danger"> Excluir</a> </td>
 
 
                                         </tr>
-
+                                        <script th:inline="javascript">
+                                        /*<![CDATA[*/
+                                            function deletar(id) {
+                                                try {
+                                                    var confirmacao = confirm("Deseja redirecionar?");
+                                                    var teachers =/*[[${TeachersList}]]*/ '';
+                                                    var actualTeacher = teachers.find(function(teacher) {
+                                                      return teacher.id === id;
+                                                    });
+                                                    if (confirmacao) {
+                                                    var teacherClassrooms = actualTeacher.classrooms;
+                                                    if(teacherClassrooms == null){
+                                                        var url = '/teacher/' + id + '/delete';
+                                                        window.location.href = url;
+                                                    }else{
+                                                        throw new Error("Não é possivel deletar o Professor que está matriculado em uma ou mais disciplinas");
+                                                    }
+                                                    }
+                                                } catch (error) {
+                                                    alert(error);
+                                                }
+                                            }
+                                        /*]]>*/
+                                        </script>
 
                                     </tbody>
                                 </table>
