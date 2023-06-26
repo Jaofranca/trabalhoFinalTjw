@@ -1,5 +1,6 @@
 package com.joaofranca.finalTjw.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -23,7 +24,9 @@ import java.util.List;
         @Column(name = "age",nullable = false,unique = false)
         private Integer age;
 
+
         @OneToMany(mappedBy = "teacher")
+        @JsonIgnore
         private List<Classroom> classrooms;
 
         @Builder

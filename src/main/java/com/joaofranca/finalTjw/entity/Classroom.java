@@ -1,5 +1,6 @@
 package com.joaofranca.finalTjw.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -25,6 +26,7 @@ public class Classroom {
 
     @ManyToMany(cascade = CascadeType.PERSIST)
     @JoinTable(name = "students_classrooms", joinColumns = @JoinColumn(name = "classroom_id"), inverseJoinColumns = @JoinColumn(name = "student_id"))
+    @JsonIgnore
 //    @JsonIgnore
 ////    private Set<Student> students;
 

@@ -53,8 +53,11 @@ public class ClassroomsController {
     }
     @GetMapping("/classroom/{id}")
     public String classroomFind(@PathVariable long id,Model model,Model teacherModel){
+
         List<TeacherResponseDTO> teachersList = teacherService.findAll();
+        List<StudentResponseDTO> studentsList = studentService.findAll();
         teacherModel.addAttribute("TeachersList",teachersList);
+        teacherModel.addAttribute("StudentsList",studentsList);
         model.addAttribute("classroom",classroomService.findById(id));
         return "/edit/classroom";
     }

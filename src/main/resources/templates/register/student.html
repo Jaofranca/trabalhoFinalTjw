@@ -12,7 +12,10 @@
                             </div>
                             <div class="form-group">
                                 <label for="StudentCpf">CPF</label>
-                                <input type="number" class="form-control"  name="cpf" required id="StudentCpf" placeholder="Digite o CPF do Estudante">
+                                <input type="text" class="form-control" id="StudentCpf" name="cpf" pattern="[0-9]{11}" title="O número deve conter exatamente 11 dígitos numéricos" required>
+                                <div class="invalid-feedback">
+                                    Por favor, insira um cpf válido com 11 dígitos.
+                                </div>
                             </div>
                             <div class="form-group">
                                 <label for="StudentAge">Idade</label>

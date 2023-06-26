@@ -12,13 +12,14 @@
                             </div>
                             <div class="form-group">
                                 <label for="TeacherCpf">CPF</label>
-                                <input type="number" class="form-control" th:value= "${teacher.cpf}"  name="cpf" required id="TeacherCpf" placeholder="Digite o CPF do Estudante">
-                            </div>
+                                <input type="text" class="form-control" th:value= "${teacher.cpf}" id="TeacherCpf" name="cpf" pattern="[0-9]{11}" title="O número deve conter exatamente 11 dígitos numéricos" required>
+                                <div class="invalid-feedback">
+                                    Por favor, insira um cpf válido com 11 dígitos.
+                                </div>
                             <div class="form-group">
                                 <label for="TeacherAge">Idade</label>
                                 <input type="number" class="form-control" th:value= "${teacher.age}" name="age" required id="TeacherAge" min="10" max="100" placeholder="Digite a idade do Estudante">
                             </div>
-
                             <button type="submit" class="btn btn-primary">Enviar</button>
                         </form>
 

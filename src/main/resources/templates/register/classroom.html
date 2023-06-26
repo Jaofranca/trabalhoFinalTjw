@@ -1,5 +1,17 @@
-
 <div th:replace="shared/header" xmlns:th="http://www.w3.org/1999/xhtml"></div>
+<style>
+    .checkboxes {
+      text-align:center;
+    }
+
+    .checkboxes input {
+      margin: 0;
+    }
+
+    .checkboxes label {
+      margin: 0 20px 0 3px;
+    }
+  </style>
                 <div class="container-fluid">
 
 
@@ -21,9 +33,11 @@
                                 </select>
                             </div>
 
-                            <ul id="ClassroomStudents" style="height: 200px; width: 18%; overflow: hidden; overflow-y: scroll"></ul>
+                            <ul id="ClassroomStudents" style="padding: 10px; height: 200px; width: 50%; overflow: hidden; overflow-y: scroll"></ul>
 
                             <input type="hidden" name="students" id="selectedStudents" />
+
+                            <button type="submit" class="btn btn-primary">Enviar</button>
 
                             <script type="text/javascript" th:inline="javascript">
                              /*<![CDATA[*/
@@ -93,8 +107,9 @@
                         /*]]>*/
                     </script>
 
-                            <button type="submit" class="btn btn-primary">Enviar</button>
+
                         </form>
 
             </div>
+
 <div th:replace="shared/footer" xmlns:th="http://www.w3.org/1999/xhtml"></div>

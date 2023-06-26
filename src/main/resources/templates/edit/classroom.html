@@ -12,15 +12,105 @@
                             </div>
                             <label for="ClassroomTeacher">Professor</label>
                             <div class="col-lg-3" >
-                                <select class="form-control" id="ClassroomTeacher"  name="testOrder">
-                                    <option value="">Escolha o professor da turma</option>
-                                    <option th:each="teacher : ${TeachersList}"
+                                <select required class="form-control" id="ClassroomTeacher"  name="teacher">
+                                    <option disabled value="">Escolha o professor da turma</option>
+                                    <option th:each="teacher: ${TeachersList}" th:unless="${teacher == classroom.teacher}"
                                             th:value="${teacher.id}"
-                                            th:text="${teacher.name}"></option>
+                                                th:text="${teacher.name}"></option>
                                 </select>
                             </div>
 
+
+                            <ul id="ClassroomStudents" style="padding: 10px; height: 200px; width: 50%; overflow: hidden; overflow-y: scroll"></ul>
+
+                            <input type="hidden" name="students" id="selectedStudents" />
+
                             <button type="submit" class="btn btn-primary">Enviar</button>
+
+                            <script type="text/javascript" th:inline="javascript">
+                             /*<![CDATA[*/
+                             var message =/*[[${StudentsList}]]*/ 'defaultanyvalue';
+                             console.log(message);
+                            if(message.length > 0){
+
+                            const students = []
+                            const classroomStudents = []
+                            var studentsModelList = [[${StudentsList}]]
+                            var classroomStudentsList = [[${classroom.students}]]
+                            for (i = 0; i < studentsModelList.length; i++) {
+                                students.push(studentsModelList[i])
+                            }
+                            for (i = 0; i < classroomStudentsList.length; i++) {
+                                classroomStudents.push(classroomStudentsList[i].id)
+                            }
+                            var checkboxList = document.getElementById("ClassroomStudents");
+                            var hiddenList = document.getElementById("selectedStudentsHidden");
+                            var SelectedStudentsArray = []
+
+                            for (var i = 0; i < students.length; i++) {
+                                const checkboxId = students[i].id
+
+                                var listItem = document.createElement("li");
+
+                                var Div = document.createElement('div');
+                                Div.id = students[i].id;
+                                Div.className = 'form-check';
+
+                                var checkbox = document.createElement("input");
+                                checkbox.type = "checkbox";
+                                checkbox.name = "checkbox";
+                                checkbox.value = checkboxId;
+                                checkbox.id = checkboxId;
+                                if(classroomStudents.includes(checkboxId)){
+                                    checkbox.checked = true;
+                                }
+
+
+                                checkbox.addEventListener('click', function() {
+                                  if(classroomStudents.includes(checkboxId)){
+                                    SelectedStudentsArray.push(checkboxId);
+                                    deleteFromList(classroomStudents,checkboxId)
+                                    alert(SelectedStudentsArray)
+                                }
+
+                                  if (this.checked) {
+                                    SelectedStudentsArray.push(checkboxId);
+                                    console.log(SelectedStudentsArray)
+                                  } else {
+                                      deleteFromList(SelectedStudentsArray,checkboxId)
+                                  }
+                                  const selectedStudentsInput = document.getElementById('selectedStudents');
+                                  const checkedCheckboxes = checkboxList.querySelectorAll('input[type="checkbox"]:checked');
+                                  const selectedStudents = Array.from(checkedCheckboxes).map(function(checkbox) {
+                                    return checkbox.value;
+                                  });
+                                  console.log(SelectedStudentsArray);
+                                  selectedStudentsInput.value = SelectedStudentsArray;
+
+                                });
+
+                                Div.appendChild(checkbox);
+                                var label = document.createElement("label");
+                                label.innerText = students[i].name;
+                                label.for = students[i].id;
+                                Div.appendChild(label);
+
+                                checkboxList.appendChild(Div);
+
+
+                            }
+
+                                }
+
+                        /*]]>*/
+
+                        function deleteFromList(array, id){
+                            const index = array.indexOf(id);
+                                    if (index !== -1) {
+                                      array.splice(index, 1);
+                                    }
+                        }
+                    </script>
                         </form>
 
             </div>

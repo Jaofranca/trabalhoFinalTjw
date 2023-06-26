@@ -1,5 +1,6 @@
 package com.joaofranca.finalTjw.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -30,7 +31,9 @@ public class Student {
 //            joinColumns = @JoinColumn(name = "student_id" ),
 //            inverseJoinColumns = @JoinColumn(name = "classroom_id")
 //    )
+
     @ManyToMany(mappedBy = "students", cascade = CascadeType.PERSIST)
+    @JsonIgnore
     private List<Classroom> classrooms;
 
     @Builder

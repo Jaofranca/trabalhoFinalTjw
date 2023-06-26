@@ -48,8 +48,37 @@
                                                 <a th:each="classroom: ${student.classrooms}" th:text = "${classroom.name} +','+' '" ></a>
                                             </td>
                                             <td><a th:href="@{/student/{id}(id=${student.id})}" class = "btn btn-warning"> Alterar</a> </td>
-                                            <td><a href="#" th:onclick="'window.location.href = \'' + @{/student/{id}(id=${student.id})} + '/delete\''"  class = "btn btn-danger"> Excluir</a> </td>
+
+                                            <td><a href="#" th:onclick="redirecionar(/*[[${student.id}]]*/)" class = "btn btn-danger"> Excluir</a> </td>
+                                            <!--                                            <td><a href="#" th:onclick="'window.location.href = \'' + @{/student/{id}(id=${student.id})} + '/delete\''"  class = "btn btn-danger"> Excluir</a> </td>-->
                                         </tr>
+                                        <script type="text/javascript" th:inline="javascript">
+                                           function redirecionar(id) {
+<!--                                                    if (confirm('Deseja realmente excluir este professor?')) {-->
+<!--                                                      var url = '/student/' + id + '/delete';-->
+<!--                                                      window.open(url)-->
+<!--                                                            .then(response => {-->
+<!--                                                                if (response.ok) {-->
+<!--                                                                    location.reload()-->
+<!--                                                                } else {-->
+<!--                                                                    console.error('Ocorreu um erro ao excluir o professor.')-->
+<!--                                                                }-->
+<!--                                                            })-->
+<!--                                                            .catch(error => {-->
+<!--                                                                console.error('Ocorreu um erro ao excluir o professor:', error)-->
+<!--                                                            })-->
+<!--                                                    }-->
+                                                        try {
+                                                        var confirmacao = confirm("Deseja abrir uma nova janela?");
+                                                        if (confirmacao) {
+                                                            var url = '/student/' + id + '/delete';
+                                                            window.open(url);
+                                                        }
+                                                        } catch (error) {
+                                                            console.log("Ocorreu um erro: " + error);
+                                                        }
+                                                }
+                                        </script>
 
                                     </tbody>
                                 </table>
