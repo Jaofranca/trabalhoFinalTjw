@@ -5,7 +5,7 @@
                     <h1 class="h3 mb-2 text-gray-800">Editar o Estudante </h1>
                     <div class="card shadow mb-4" style = "padding: 30px;">
 
-                        <form method="POST" th:action ="@{'/student/' + ${student.id} + '/update'}" >
+                        <form method="POST" id="StudentForm" onsubmit="submitForm(event);" th:action ="@{'/student/' + ${student.id} + '/update'}" >
                             <div class="form-group">
                                 <label for="StudentName">Nome</label>
                                 <input type="text" class="form-control" th:value= "${student.name}" name ="name" required id="StudentName" placeholder="Digite o nome do Estudante" >
@@ -24,6 +24,32 @@
 
                             <button type="submit" class="btn btn-primary">Enviar</button>
                         </form>
+
+                        <script>
+                        /*<![CDATA[*/
+                        function submitForm(event) {
+                        try{
+                          event.preventDefault();
+                          var studentsCPFList =[[${studentsCpf}]];
+                          var student =[[${student}]]
+                          console.log(student)
+<!--                          var students =/*[[${StudentsList}]]*/ ;-->
+                          var studentCpf = document.getElementById("StudentCpf");
+                          console.log(studentsCPFList)
+                          if(student.id == studentCpf.value){
+                               console.log(studentsCPFList)
+<!--                              document.getElementById("StudentForm").submit();-->
+                          }if(studentsCPFList.includes(student.id)){
+                            throw new Error("Não é possivel atribuir um cpf que ja existe na base de dados");
+
+                          }
+<!--                          document.getElementById("StudentForm").submit();-->
+                        }catch(error){
+                            alert(error);
+                        }
+                        }
+                        /*]]>*/
+                        </script>
 
             </div>
 <div th:replace="shared/footer" xmlns:th="http://www.w3.org/1999/xhtml"></div>

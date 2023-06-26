@@ -51,18 +51,20 @@
                                         /*<![CDATA[*/
                                             function deletar(id) {
                                                 try {
-                                                    var confirmacao = confirm("Deseja redirecionar?");
+                                                    var confirmacao = confirm("Deseja Deletar o Professor?");
                                                     var teachers =/*[[${TeachersList}]]*/ '';
                                                     var actualTeacher = teachers.find(function(teacher) {
                                                       return teacher.id === id;
                                                     });
                                                     if (confirmacao) {
                                                     var teacherClassrooms = actualTeacher.classrooms;
-                                                    if(teacherClassrooms == null){
+                                                    console.log(teacherClassrooms)
+                                                    if(teacherClassrooms === null || teacherClassrooms === undefined || teacherClassrooms.length === 0){
+                                                    console.log('aqui')
                                                         var url = '/teacher/' + id + '/delete';
                                                         window.location.href = url;
                                                     }else{
-                                                        throw new Error("Não é possivel deletar o Professor que está matriculado em uma ou mais disciplinas");
+                                                        throw new Error("Não é possivel deletar o estudante que está matriculado em uma disciplina");
                                                     }
                                                     }
                                                 } catch (error) {

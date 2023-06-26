@@ -8,17 +8,17 @@
                         <form method="POST" th:action ="@{'/teacher/' + ${teacher.id} + '/update'}" >
                             <div class="form-group">
                                 <label for="TeacherName">Nome</label>
-                                <input type="text" class="form-control" th:value= "${teacher.name}" name ="name" required id="TeacherName" placeholder="Digite o nome do Estudante" >
+                                <input type="text" class="form-control" th:value= "${teacher.name}" name ="name" required id="TeacherName" placeholder="Digite o nome do Professor" >
                             </div>
                             <div class="form-group">
                                 <label for="TeacherCpf">CPF</label>
-                                <input type="text" class="form-control" th:value= "${teacher.cpf}" id="TeacherCpf" name="cpf" pattern="[0-9]{11}" title="O número deve conter exatamente 11 dígitos numéricos" required>
+                                <input type="text" class="form-control" th:value= "${teacher.cpf}" id="TeacherCpf" name="cpf" pattern="[0-9]{11}" title="O número deve conter exatamente 11 dígitos numéricos" placeholder="Digite o CPF do Professor" required>
                                 <div class="invalid-feedback">
                                     Por favor, insira um cpf válido com 11 dígitos.
                                 </div>
                             <div class="form-group">
                                 <label for="TeacherAge">Idade</label>
-                                <input type="number" class="form-control" th:value= "${teacher.age}" name="age" required id="TeacherAge" min="10" max="100" placeholder="Digite a idade do Estudante">
+                                <input type="number" class="form-control" th:value= "${teacher.age}" name="age" required id="TeacherAge" min="10" max="100" placeholder="Digite a idade do Professor">
                             </div>
                             <button type="submit" class="btn btn-primary">Enviar</button>
                         </form>

@@ -49,19 +49,20 @@
                                         /*<![CDATA[*/
                                             function deletar(id) {
                                                 try {
-                                                    var confirmacao = confirm("Deseja redirecionar?");
+                                                    var confirmacao = confirm("Deseja Deletar o Aluno?");
                                                     var students =/*[[${StudentsList}]]*/ '';
                                                     var actualStudent = students.find(function(student) {
                                                       return student.id === id;
                                                     });
-                                                    console.log(actualStudent)
                                                     if (confirmacao) {
                                                     var studentClassrooms = actualStudent.classrooms;
-                                                    if(studentClassrooms == null){
+                                                    console.log(studentClassrooms)
+                                                    if(studentClassrooms === null || studentClassrooms === undefined || studentClassrooms.length === 0){
+                                                    console.log('aqui')
                                                         var url = '/student/' + id + '/delete';
                                                         window.location.href = url;
                                                     }else{
-                                                        throw new Error("Não é possivel deletar o estudante que está cadastrado em uma disciplina");
+                                                        throw new Error("Não é possivel deletar o estudante que está matriculado em uma disciplina");
                                                     }
                                                     }
                                                 } catch (error) {

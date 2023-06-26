@@ -2,6 +2,7 @@ package com.joaofranca.finalTjw.controller.pageControllers;
 
 import com.joaofranca.finalTjw.dto.request.StudentRequestDTO;
 import com.joaofranca.finalTjw.dto.response.StudentResponseDTO;
+import com.joaofranca.finalTjw.entity.Student;
 import com.joaofranca.finalTjw.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Controller
 public class StudentsController {
@@ -37,6 +39,11 @@ public class StudentsController {
     }
     @GetMapping("/student/{id}")
     public ModelAndView studentFind(@PathVariable long id,Model model){
+        List<StudentResponseDTO> studentsList = studentService.findAll();
+        List<String> studentsCpf = studentsList.stream()
+                .map(StudentResponseDTO::getCpf)
+                .collect(Collectors.toList());
+        model.addAttribute("studentsCpf",studentsCpf);
         model.addAttribute("student",studentService.findById(id));
         return new ModelAndView("/edit/student");
     }

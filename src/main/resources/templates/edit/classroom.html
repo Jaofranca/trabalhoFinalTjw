@@ -72,13 +72,15 @@
 
 
                                 checkbox.addEventListener('click', function() {
-                                console.log(classroomStudentsId)
                                   if (this.checked) {
                                     SelectedStudentsArray.push(checkboxId);
+                                    console.log(SelectedStudentsArray)
 
                                   } else {
                                       deleteFromList(SelectedStudentsArray,checkboxId)
+                                      console.log(SelectedStudentsArray)
                                   }
+                                  saveInputsToHidden();
 
                                 });
 
@@ -92,13 +94,7 @@
 
 
                             }
-                                  const selectedStudentsInput = document.getElementById('selectedStudents');
-                                  const checkedCheckboxes = checkboxList.querySelectorAll('input[type="checkbox"]:checked');
-                                  const selectedStudents = Array.from(checkedCheckboxes).map(function(checkbox) {
-                                    return checkbox.value;
-                                  });
-                                  selectedStudentsInput.value = SelectedStudentsArray;
-                                  console.log(SelectedStudentsArray)
+                                  saveInputsToHidden();
 
                                 }
 
@@ -109,6 +105,16 @@
                                     if (index !== -1) {
                                       array.splice(index, 1);
                                     }
+                        }
+
+                        function saveInputsToHidden(){
+                            const selectedStudentsInput = document.getElementById('selectedStudents');
+                                  const checkedCheckboxes = checkboxList.querySelectorAll('input[type="checkbox"]:checked');
+                                  const selectedStudents = Array.from(checkedCheckboxes).map(function(checkbox) {
+                                    return checkbox.value;
+                                  });
+                                  selectedStudentsInput.value = SelectedStudentsArray;
+                                  console.log(SelectedStudentsArray)
                         }
                     </script>
                         </form>
